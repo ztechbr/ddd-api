@@ -157,18 +157,32 @@ schema = strawberry.Schema(query=Query)
 
 app = Flask(__name__)
 
-# Swagger config
-swagger_cfg = {
+# Flasgger: template (conteúdo do swagger) + config (inclui specs)
+swagger_template = {
     "swagger": "2.0",
     "info": {
         "title": "DDD Brasil API",
         "description": "REST + GraphQL para consulta de DDDs do Brasil",
         "version": "1.0.0",
     },
-    "basePath": "/",
-    "schemes": ["http"],
 }
-Swagger(app, config=swagger_cfg)
+
+swagger_config = {
+    "headers": [],
+    "specs": [
+        {
+            "endpoint": "apispec_1",
+            "route": "/apispec_1.json",
+            "rule_filter": lambda rule: True,
+            "model_filter": lambda tag: True,
+        }
+    ],
+    "static_url_path": "/flasgger_static",
+    "swagger_ui": True,
+    "specs_route": "/apidocs/",
+}
+
+Swagger(app, config=swagger_config, template=swagger_template)
 
 # GraphQL endpoint (com GraphiQL)
 app.add_url_rule(
