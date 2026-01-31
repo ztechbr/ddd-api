@@ -1,0 +1,4 @@
+Flask==3.0.3
+strawberry-graphql==0.246.2
+flasgger==0.9.7.1
+gunicorn==22.0.0

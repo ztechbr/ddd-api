@@ -1,0 +1,9 @@
+services:
+  ddd-api:
+    build: .
+    container_name: ddd-api
+    ports:
+      - "5000:5000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
